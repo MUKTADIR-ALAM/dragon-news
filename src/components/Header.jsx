@@ -1,11 +1,12 @@
-import logo from '../assets/img/'
+import logo from '../assets/img/logo.png'
 
 export default function Header() {
   return (
-    <div>
+    <div className='flex flex-col justify-center items-center gap-2 my-2'>
         <div className="logo">
-            <img src="" alt="" />
+            <img className='w-[300px]' src={logo} alt="" />
         </div>
+        <h2 className='text-gray-400'>Journalism Without Fear or Favour</h2>
     </div>
   )
 }
