@@ -1,11 +1,22 @@
 import { Link } from "react-router-dom";
 
 export default function Register() {
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form =  new FormData(e.target);
+    const name = form.get('name');
+    const email = form.get('email');
+    const photo = form.get('photo');
+    const password = form.get('password');
+    console.log({name,email,photo,password});
+  }
+
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="card bg-base-100 w-full max-w-lg shrink-0 rounded-none p-10   ">
         <h2 className="text-2xl font-semibold text-center">Register your account</h2>
-        <form className="card-body">
+        <form onSubmit={handleSubmit} className="card-body">
 
 
           <div className="form-control">
@@ -14,6 +25,7 @@ export default function Register() {
             </label>
             <input
               type="text"
+              name="name"
               placeholder="name"
               className="input input-bordered"
               required
@@ -25,6 +37,7 @@ export default function Register() {
             </label>
             <input
               type="text"
+              name="photo"
               placeholder="photo-url"
               className="input input-bordered"
               required
@@ -36,6 +49,7 @@ export default function Register() {
             </label>
             <input
               type="email"
+              name="email"
               placeholder="email"
               className="input input-bordered"
               required
@@ -47,6 +61,7 @@ export default function Register() {
             </label>
             <input
               type="password"
+              name="password"
               placeholder="password"
               className="input input-bordered"
               required
