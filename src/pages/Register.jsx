@@ -1,7 +1,12 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../components/provider/AuthProvider";
 
 export default function Register() {
 
+  const {createNewUser,setUser,updateUserProfile} = useContext(AuthContext);
+
+  const navigate = useNavigate();
   const handleSubmit = e => {
     e.preventDefault();
     const form =  new FormData(e.target);
@@ -9,7 +14,23 @@ export default function Register() {
     const email = form.get('email');
     const photo = form.get('photo');
     const password = form.get('password');
-    console.log({name,email,photo,password});
+    createNewUser(email,password)
+    .then((result) => { 
+      const user = result.user;
+      setUser(user);
+      updateUserProfile({displayName:name,photoURL:photo})
+      .then(()=>{
+        navigate('/');
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode,errorMessage);
+    });
   }
 
   return (
